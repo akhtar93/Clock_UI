@@ -1,17 +1,44 @@
 (function () {
   var useDarkTheme = false;
   function startClock() {
-    const button = document.getElementById('theme');
-  button.addEventListener('click', function() {
-    useDarkTheme = !useDarkTheme;
-    const body = document.querySelector('body');
-    if (useDarkTheme) {
-      body.classList.add('dark');
-    } else{
-      body.classList.remove('dark');
+    setInterval(updateClockTimer, 1000);
+    getCUrrentLocation();
+  }
+  function getCUrrentLocation() {
+    let weather;
+    if (!navigator.geolocation) {
+      return;
     }
-  });
-    setInterval(updateClockTimer, 1000)
+   navigator.geolocation.getCurrentPosition((pos) => {
+    const weatherSection = document.getElementById('weatherInfo');
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&appid=39a25b127cf04b4eab27eac178ae8720`;
+    fetch(apiUrl, { method: 'GET' })
+    .then((resp) => resp.json())
+    .then((data) => {
+      weather = new Weather(data);
+      updateForWeatherDetais(weather, weatherSection);
+    });
+   });
+  }
+  function updateForWeatherDetais(weatherObj, weatherSection) {
+    weatherSection.style.display = 'flex';
+    const locationSelector = document.getElementById('locationName');
+    const weatherType = document.getElementById('weatehrCondition');
+    const weatherDesc = document.getElementById('weatherDescription');
+    const temperature = document.getElementById('temperature');
+    const minTemp = document.getElementById('minTemp');
+    const maxTemp = document.getElementById('maxTemp');
+    const humidity = document.getElementById('humididy');
+    const wind = document.getElementById('wind');
+    locationSelector.innerText = weatherObj.getLocationInfo().location;
+    weatherType.innerText = weatherObj.getClimateCondition().type;
+    weatherDesc.innerText = weatherObj.getClimateCondition().description;
+    temperature.innerText = weatherObj.getTemperature();
+    minTemp.innerText = weatherObj.getMinMaxTemperature().minTemp;
+    maxTemp.innerText = weatherObj.getMinMaxTemperature().maxTemp;
+    humidity.innerText = weatherObj.getHumidity();
+    wind.innerText = weatherObj.getWindSPeed();
+
   }
   function updateClockTimer() {
     var hourHand = document.getElementById('clockHour');

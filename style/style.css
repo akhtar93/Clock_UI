@@ -159,7 +159,26 @@ body{
   border-radius: .75rem;
   z-index: var(--default-z-index);
 }
-
+.weather-container{
+  display: none;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: center; */
+    row-gap: 10px;
+}
+.location-container{
+  text-align: center;
+}
+.weather-type{
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 2rem;
+}
+.weather-details{
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 2rem;
+}
 body.dark{
   --default-font-color: #f1f1f4;
   --default-background-color: #25252D;

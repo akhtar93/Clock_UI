@@ -6,12 +6,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./style/style.css">
   <script src="./script/index.js"></script>
+  <script src="./script/Weather.js"></script>
   <title>Document</title>
 </head>
 
 <body id="clock-body">
-  <button id="theme">Change Theme</button>
   <section class="clock container flex">
+    <div class="weather-container" id="weatherInfo">
+      <div class="location-container">
+        <h3 id="locationName"></h3>
+      </div>
+      <div class="weather-type">
+        <div class="weather-condition">
+          <h5 id="weatehrCondition"></h5>
+        </div>
+        <div class="weather-description">
+          <h5 id="weatherDescription"></h5>
+        </div>
+      </div>
+      <div class="weather-details">
+        <div class="temperature">
+          <div class="actual-temperature">
+            <h5 id="temperature"></h5>
+          </div>
+          <div class="min-max-temp">
+            <h5>
+              Min: <span id="minTemp"></span>
+            </h5>
+            <h5>
+              Max: <span id="maxTemp"></span>
+            </h5>
+          </div>
+        </div>
+        <div class="humidity">
+          <h5 id="humididy"></h5>
+        </div>
+        <div class="wind">
+          <h5 id="wind"></h5>
+        </div>
+      </div>
+    </div>
     <div class="clock-contianer flex flex-column">
       <div class="clock-content flex">
         <div class="clock-circle flex">
